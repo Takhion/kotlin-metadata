@@ -1,0 +1,19 @@
+apply plugin: 'kotlin'
+//apply plugin: 'kotlin-kapt' //TODO enable new kapt after youtrack.jetbrains.com/issue/KT-19179
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    compileOnly 'com.google.auto.service:auto-service:1.0-rc3'
+    kapt 'com.google.auto.service:auto-service:1.0-rc3'
+    compile project(':data-class-with:api')
+    compile project(':lib')
+}
+
+compileKotlin {
+    //TODO remove after youtrack.jetbrains.com/issue/KT-16780
+    kotlinOptions.freeCompilerArgs += ["-Xskip-runtime-version-check"]
+}
+
+kapt {
+    generateStubs = true
+}

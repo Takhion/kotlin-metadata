@@ -1,0 +1,5 @@
+rootProject.name = 'kotlin-metadata'
+include ':lib'
+include ':data-class-with:app'
+include ':data-class-with:api'
+include ':data-class-with:processor'

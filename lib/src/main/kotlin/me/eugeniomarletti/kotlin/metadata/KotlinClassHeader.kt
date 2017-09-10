@@ -5,6 +5,7 @@ import org.jetbrains.kotlin.load.java.JvmAnnotationNames.KIND_FIELD_NAME
 import org.jetbrains.kotlin.load.java.JvmAnnotationNames.METADATA_DATA_FIELD_NAME
 import org.jetbrains.kotlin.load.java.JvmAnnotationNames.METADATA_EXTRA_INT_FIELD_NAME
 import org.jetbrains.kotlin.load.java.JvmAnnotationNames.METADATA_EXTRA_STRING_FIELD_NAME
+import org.jetbrains.kotlin.load.java.JvmAnnotationNames.METADATA_PACKAGE_NAME_FIELD_NAME
 import org.jetbrains.kotlin.load.java.JvmAnnotationNames.METADATA_STRINGS_FIELD_NAME
 import org.jetbrains.kotlin.load.java.JvmAnnotationNames.METADATA_VERSION_FIELD_NAME
 import org.jetbrains.kotlin.load.java.JvmBytecodeBinaryVersion
@@ -31,6 +32,7 @@ internal val Element.kotlinClassHeader: KotlinClassHeader? get() {
     var strings: Array<String>? = null
     var incompatibleData: Array<String>? = null
     var headerKind: KotlinClassHeader.Kind? = null
+    var packageName: String? = null
 
     for (annotation in annotationMirrors) {
         if ((annotation.annotationType.asElement() as TypeElement).qualifiedName.toString() != kotlinMetadataAnnotation) continue
@@ -53,6 +55,8 @@ internal val Element.kotlinClassHeader: KotlinClassHeader? get() {
                     data = @Suppress("UNCHECKED_CAST") (value as List<String>).toTypedArray()
                 METADATA_STRINGS_FIELD_NAME == name ->
                     strings = @Suppress("UNCHECKED_CAST") (value as List<String>).toTypedArray()
+                METADATA_PACKAGE_NAME_FIELD_NAME == name && value is String ->
+                    packageName = value
             }
         }
     }
@@ -79,7 +83,8 @@ internal val Element.kotlinClassHeader: KotlinClassHeader? get() {
         incompatibleData,
         strings,
         extraString,
-        extraInt
+        extraInt,
+        packageName
     )
 }
 

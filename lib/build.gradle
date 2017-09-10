@@ -1,7 +1,7 @@
 ext {
     PUBLISH_GROUP_ID = 'me.eugeniomarletti'
     PUBLISH_ARTIFACT_ID = 'kotlin-metadata'
-    PUBLISH_VERSION = '1.2.0'
+    PUBLISH_VERSION = '1.2.1'
 }
 
 apply plugin: 'kotlin'
@@ -16,8 +16,6 @@ dependencies {
 compileKotlin {
     kotlinOptions {
         freeCompilerArgs = ['-module-name', "$PUBLISH_GROUP_ID.$PUBLISH_ARTIFACT_ID"]
-        //TODO remove after youtrack.jetbrains.com/issue/KT-16780
-        freeCompilerArgs += ["-Xskip-runtime-version-check"]
     }
 }
 }

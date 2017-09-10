@@ -81,7 +81,7 @@ private val ProtoBuf.Function.flagsOrOld: Int get() = if (hasFlags()) flags else
 private val ProtoBuf.Property.flagsOrOld: Int get() = if (hasFlags()) flags else loadOldFlags(oldFlags)
 
 /**
- * @see MemberDeserializer.loadOldFlags
+ * @see [MemberDeserializer.loadOldFlags]
  */
 private fun loadOldFlags(oldFlags: Int): Int {
     val lowSixBits = oldFlags and 0x3f

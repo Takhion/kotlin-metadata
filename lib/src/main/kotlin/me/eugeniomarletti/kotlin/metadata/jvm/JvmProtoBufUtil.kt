@@ -1,12 +1,15 @@
-package me.eugeniomarletti.kotlin.metadata
+package me.eugeniomarletti.kotlin.metadata.jvm
 
 import org.jetbrains.kotlin.serialization.ProtoBuf
 import org.jetbrains.kotlin.serialization.deserialization.NameResolver
 import org.jetbrains.kotlin.serialization.deserialization.TypeTable
 import org.jetbrains.kotlin.serialization.jvm.JvmProtoBufUtil
+import javax.lang.model.element.ExecutableElement
 
 /**
- * Returns JVM signature in the format: "equals(Ljava/lang/Object;)Z"
+ * Returns JVM signature in the format: `equals(Ljava/lang/Object;)Z`.
+ *
+ * See [ExecutableElement.jvmMethodSignature][JvmDescriptorUtils.jvmMethodSignature] for getting the same from an [ExecutableElement].
  */
 fun ProtoBuf.Function.getJvmMethodSignature(nameResolver: NameResolver, typeTable: ProtoBuf.TypeTable = this.typeTable) =
     JvmProtoBufUtil.getJvmMethodSignature(this, nameResolver, TypeTable(typeTable))

@@ -69,7 +69,7 @@ internal object Generator {
     private fun whereClause(typeArguments: List<TypeParameter>) =
         typeArguments
             .flatMap { (name, upperBounds) -> upperBounds.map { Pair(name, it) } }
-            .filterNot { (_, upperBound) -> upperBound.isNullOrBlank() }
+            .filterNot { (_, upperBound) -> upperBound.isBlank() }
             .takeIf { it.isNotEmpty() }
             ?.joinToString(prefix = "\n    where ") { (name, upperBound) -> "$name : $upperBound" }
             ?: ""

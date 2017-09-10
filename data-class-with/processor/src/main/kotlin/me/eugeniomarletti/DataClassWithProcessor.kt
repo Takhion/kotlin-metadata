@@ -5,11 +5,13 @@ import me.eugeniomarletti.Generator.Input
 import me.eugeniomarletti.Generator.Parameter
 import me.eugeniomarletti.Generator.TypeParameter
 import me.eugeniomarletti.kotlin.metadata.KotlinClassMetadata
+import me.eugeniomarletti.kotlin.metadata.KotlinMetadataUtils
 import me.eugeniomarletti.kotlin.metadata.extractFullName
 import me.eugeniomarletti.kotlin.metadata.isDataClass
 import me.eugeniomarletti.kotlin.metadata.isPrimary
 import me.eugeniomarletti.kotlin.metadata.kaptGeneratedOption
 import me.eugeniomarletti.kotlin.metadata.kotlinMetadata
+import me.eugeniomarletti.kotlin.processing.KotlinAbstractProcessor
 import org.jetbrains.kotlin.serialization.ProtoBuf
 import java.io.File
 import javax.annotation.processing.AbstractProcessor
@@ -22,7 +24,7 @@ import javax.tools.Diagnostic.Kind.ERROR
 
 @AutoService(Processor::class)
 @Suppress("unused")
-class DataClassWithProcessor : AbstractProcessor() {
+class DataClassWithProcessor : KotlinAbstractProcessor(), KotlinMetadataUtils {
 
     private val annotationName = WithMethods::class.java.canonicalName
 
@@ -30,8 +32,8 @@ class DataClassWithProcessor : AbstractProcessor() {
 
     override fun getSupportedSourceVersion(): SourceVersion = SourceVersion.latest()
 
-    override fun process(annotations: MutableSet<out TypeElement>, roundEnv: RoundEnvironment): Boolean {
-        val annotationElement = processingEnv.elementUtils.getTypeElement(annotationName)
+    override fun process(annotations: Set<TypeElement>, roundEnv: RoundEnvironment): Boolean {
+        val annotationElement = elementUtils.getTypeElement(annotationName)
         @Suppress("LoopToCallChain")
         for (element in roundEnv.getElementsAnnotatedWith(annotationElement)) {
             val input = getInputFrom(element) ?: continue
@@ -89,18 +91,18 @@ class DataClassWithProcessor : AbstractProcessor() {
     }
 
     private fun errorMustBeDataClass(element: Element) {
-        processingEnv.messager.printMessage(ERROR,
+        messager.printMessage(ERROR,
             "@${WithMethods::class.java.simpleName} can't be applied to $element: must be a Kotlin data class", element)
     }
 
     private fun Input.generateAndWrite(): Boolean {
-        val generateOutput = processingEnv.options[kaptGeneratedOption]?.let(::File) ?: run {
-            processingEnv.messager.printMessage(ERROR, "Can't find option '$kaptGeneratedOption'")
+        val generatedDir = generatedDir ?: run {
+            messager.printMessage(ERROR, "Can't find option '$kaptGeneratedOption'")
             return false
         }
         val dirPath = `package`.replace('.', File.separatorChar)
         val filePath = "DataClassWithExtensions_${fqClassName.substringAfter(`package`).replace('.', '_')}.kt"
-        val dir = File(generateOutput, dirPath).also { it.mkdirs() }
+        val dir = File(generatedDir, dirPath).also { it.mkdirs() }
         val file = File(dir, filePath)
         file.writeText(generate())
         return true

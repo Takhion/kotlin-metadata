@@ -83,7 +83,7 @@ internal val Element.kotlinClassHeader: KotlinClassHeader? get() {
     )
 }
 
-private fun unwrapAnnotationValue(value: Any?): Any? =
+private tailrec fun unwrapAnnotationValue(value: Any?): Any? =
     when (value) {
         is AnnotationValue -> unwrapAnnotationValue(value.value)
         is List<*> -> value.map(::unwrapAnnotationValue)

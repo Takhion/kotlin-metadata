@@ -18,4 +18,3 @@ compileKotlin {
         freeCompilerArgs = ['-module-name', "$PUBLISH_GROUP_ID.$PUBLISH_ARTIFACT_ID"]
     }
 }
-}

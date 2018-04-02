@@ -18,7 +18,7 @@ val libName = "kotlin-metadata"
 val libDescription = "Analysis of Kotlin type metadata during annotation processing."
 val libUrl = mainRepoUrl
 
-val libGroupId = "me.eugeniomarletti"
+val libGroupId = "me.eugeniomarletti.kotlin.metadata"
 val libArtifactId = "kotlin-metadata"
 val libVersion = codeVersion
 
@@ -34,7 +34,7 @@ val Project.licenseUrl get() = "$mainRepoUrl/blob/$gitTag/${licenseFile.toRelati
 val issuesSystem = "GitHub"
 val issuesUrl = "$mainRepoUrl/issues"
 
-val bintrayRepo = "maven"
+val bintrayRepo = "kotlin-metadata"
 val bintrayTags = arrayOf("kotlin", "kotlin-metadata")
 
 val Project.bintrayPublish by extraOrDefault(true)

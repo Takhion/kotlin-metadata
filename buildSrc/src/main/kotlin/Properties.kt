@@ -28,7 +28,7 @@ val publicationTaskName = "publish${publicationName.capitalize()}PublicationToMa
 val authorName = "Eugenio Marletti"
 
 val licenseName = "MIT"
-val Project.licenseFile get() = rootDir.resolve("LICENSE.txt")
+val Project.licenseFile get() = rootDir.resolve("LICENSE")
 val Project.licenseUrl get() = "$mainRepoUrl/blob/$gitTag/${licenseFile.toRelativeString(rootDir)}"
 
 val issuesSystem = "GitHub"

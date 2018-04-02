@@ -2,7 +2,7 @@
 
 import org.gradle.api.Project
 
-val codeVersion = "1.2.1"
+val codeVersion = "1.3.0"
 
 val gitHubUser = "Takhion"
 val gitHubRepo = "kotlin-metadata"

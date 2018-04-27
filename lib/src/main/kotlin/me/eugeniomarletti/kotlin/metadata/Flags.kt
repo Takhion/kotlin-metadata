@@ -2,13 +2,13 @@
 
 package me.eugeniomarletti.kotlin.metadata
 
-import org.jetbrains.kotlin.serialization.Flags
-import org.jetbrains.kotlin.serialization.ProtoBuf
-import org.jetbrains.kotlin.serialization.ProtoBuf.Class.Kind
-import org.jetbrains.kotlin.serialization.ProtoBuf.MemberKind
-import org.jetbrains.kotlin.serialization.ProtoBuf.Modality
-import org.jetbrains.kotlin.serialization.ProtoBuf.Visibility
-import org.jetbrains.kotlin.serialization.deserialization.MemberDeserializer
+import me.eugeniomarletti.kotlin.metadata.shadow.metadata.ProtoBuf
+import me.eugeniomarletti.kotlin.metadata.shadow.metadata.ProtoBuf.Class.Kind
+import me.eugeniomarletti.kotlin.metadata.shadow.metadata.ProtoBuf.MemberKind
+import me.eugeniomarletti.kotlin.metadata.shadow.metadata.ProtoBuf.Modality
+import me.eugeniomarletti.kotlin.metadata.shadow.metadata.ProtoBuf.Visibility
+import me.eugeniomarletti.kotlin.metadata.shadow.metadata.deserialization.Flags
+import me.eugeniomarletti.kotlin.metadata.shadow.serialization.deserialization.MemberDeserializer
 
 val ProtoBuf.Type.isSuspendType: Boolean get() = Flags.SUSPEND_TYPE[flags]
 

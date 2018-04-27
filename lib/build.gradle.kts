@@ -4,9 +4,7 @@ plugins { kotlin("jvm") }
 
 dependencies {
     compile(kotlin("stdlib"))
-    compile(kotlin("compiler-embeddable") as String) {
-        isTransitive = true
-    }
+    compile("me.eugeniomarletti.kotlin.metadata:kotlin-compiler-lite:1.0.3-k-1.2.40")
 }
 
 tasks.withType<KotlinCompile> {

@@ -2,13 +2,19 @@ package me.eugeniomarletti.kotlin.metadata
 
 import me.eugeniomarletti.kotlin.metadata.jvm.JvmDescriptorUtils
 import me.eugeniomarletti.kotlin.metadata.jvm.getJvmMethodSignature
-import org.jetbrains.kotlin.serialization.ClassData
-import org.jetbrains.kotlin.serialization.PackageData
-import org.jetbrains.kotlin.serialization.ProtoBuf
-import org.jetbrains.kotlin.serialization.deserialization.NameResolver
+import me.eugeniomarletti.kotlin.metadata.shadow.metadata.ProtoBuf
+import me.eugeniomarletti.kotlin.metadata.shadow.metadata.deserialization.NameResolver
 import javax.annotation.processing.ProcessingEnvironment
 import javax.lang.model.element.ExecutableElement
 import javax.lang.model.element.VariableElement
+
+data class ClassData(
+    val nameResolver: NameResolver,
+    val classProto: ProtoBuf.Class)
+
+data class PackageData(
+    val nameResolver: NameResolver,
+    val packageProto: ProtoBuf.Package)
 
 /**
  * Main repository for extensions that need to access stuff inside [ProcessingEnvironment].

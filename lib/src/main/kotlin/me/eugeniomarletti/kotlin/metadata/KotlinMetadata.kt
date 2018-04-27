@@ -2,14 +2,14 @@
 
 package me.eugeniomarletti.kotlin.metadata
 
-import org.jetbrains.kotlin.load.kotlin.header.KotlinClassHeader
-import org.jetbrains.kotlin.load.kotlin.header.KotlinClassHeader.Kind.CLASS
-import org.jetbrains.kotlin.load.kotlin.header.KotlinClassHeader.Kind.FILE_FACADE
-import org.jetbrains.kotlin.load.kotlin.header.KotlinClassHeader.Kind.MULTIFILE_CLASS
-import org.jetbrains.kotlin.load.kotlin.header.KotlinClassHeader.Kind.MULTIFILE_CLASS_PART
-import org.jetbrains.kotlin.load.kotlin.header.KotlinClassHeader.Kind.SYNTHETIC_CLASS
-import org.jetbrains.kotlin.load.kotlin.header.KotlinClassHeader.Kind.UNKNOWN
-import org.jetbrains.kotlin.serialization.jvm.JvmProtoBufUtil
+import me.eugeniomarletti.kotlin.metadata.shadow.load.kotlin.header.KotlinClassHeader
+import me.eugeniomarletti.kotlin.metadata.shadow.load.kotlin.header.KotlinClassHeader.Kind.CLASS
+import me.eugeniomarletti.kotlin.metadata.shadow.load.kotlin.header.KotlinClassHeader.Kind.FILE_FACADE
+import me.eugeniomarletti.kotlin.metadata.shadow.load.kotlin.header.KotlinClassHeader.Kind.MULTIFILE_CLASS
+import me.eugeniomarletti.kotlin.metadata.shadow.load.kotlin.header.KotlinClassHeader.Kind.MULTIFILE_CLASS_PART
+import me.eugeniomarletti.kotlin.metadata.shadow.load.kotlin.header.KotlinClassHeader.Kind.SYNTHETIC_CLASS
+import me.eugeniomarletti.kotlin.metadata.shadow.load.kotlin.header.KotlinClassHeader.Kind.UNKNOWN
+import me.eugeniomarletti.kotlin.metadata.shadow.metadata.jvm.deserialization.JvmProtoBufUtil
 import javax.lang.model.element.Element
 
 val Element.kotlinMetadata get() = kotlinClassHeader?.let { KotlinMetadata.from(it) }
@@ -44,11 +44,17 @@ sealed class KotlinMetadata(val header: KotlinClassHeader) {
 }
 
 sealed class KotlinPackageMetadata(header: KotlinClassHeader) : KotlinMetadata(header) {
-    val data by lazy { JvmProtoBufUtil.readPackageDataFrom(header.data!!, header.strings!!) }
+    val data by lazy {
+        JvmProtoBufUtil.readPackageDataFrom(header.data!!, header.strings!!)
+            .let { (nameResolver, proto) -> PackageData(nameResolver, proto) }
+    }
 }
 
 class KotlinClassMetadata internal constructor(header: KotlinClassHeader) : KotlinMetadata(header) {
-    val data by lazy { JvmProtoBufUtil.readClassDataFrom(header.data!!, header.strings!!) }
+    val data by lazy {
+        JvmProtoBufUtil.readClassDataFrom(header.data!!, header.strings!!)
+            .let { (nameResolver, proto) -> ClassData(nameResolver, proto) }
+    }
 }
 
 class KotlinFileMetadata internal constructor(header: KotlinClassHeader) : KotlinPackageMetadata(header)

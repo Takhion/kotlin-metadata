@@ -1,10 +1,10 @@
 package me.eugeniomarletti.kotlin.metadata.jvm
 
-import org.jetbrains.kotlin.serialization.ProtoBuf
-import org.jetbrains.kotlin.serialization.deserialization.NameResolver
-import org.jetbrains.kotlin.serialization.deserialization.TypeTable
-import org.jetbrains.kotlin.serialization.jvm.JvmProtoBufUtil
 import me.eugeniomarletti.kotlin.metadata.KotlinMetadataUtils
+import me.eugeniomarletti.kotlin.metadata.shadow.metadata.ProtoBuf
+import me.eugeniomarletti.kotlin.metadata.shadow.metadata.deserialization.NameResolver
+import me.eugeniomarletti.kotlin.metadata.shadow.metadata.deserialization.TypeTable
+import me.eugeniomarletti.kotlin.metadata.shadow.metadata.jvm.deserialization.JvmProtoBufUtil
 import javax.lang.model.element.ExecutableElement
 
 /**

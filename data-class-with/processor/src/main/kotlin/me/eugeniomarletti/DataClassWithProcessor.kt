@@ -11,8 +11,8 @@ import me.eugeniomarletti.kotlin.metadata.isDataClass
 import me.eugeniomarletti.kotlin.metadata.isPrimary
 import me.eugeniomarletti.kotlin.metadata.kaptGeneratedOption
 import me.eugeniomarletti.kotlin.metadata.kotlinMetadata
+import me.eugeniomarletti.kotlin.metadata.shadow.metadata.ProtoBuf
 import me.eugeniomarletti.kotlin.processing.KotlinAbstractProcessor
-import org.jetbrains.kotlin.serialization.ProtoBuf
 import java.io.File
 import javax.annotation.processing.Processor
 import javax.annotation.processing.RoundEnvironment

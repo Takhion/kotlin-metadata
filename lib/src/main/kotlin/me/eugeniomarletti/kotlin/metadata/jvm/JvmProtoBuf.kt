@@ -1,8 +1,8 @@
 package me.eugeniomarletti.kotlin.metadata.jvm
 
-import me.eugeniomarletti.kotlin.metadata.getExtensionOrNull
-import org.jetbrains.kotlin.serialization.ProtoBuf
-import org.jetbrains.kotlin.serialization.jvm.JvmProtoBuf
+import me.eugeniomarletti.kotlin.metadata.shadow.metadata.ProtoBuf
+import me.eugeniomarletti.kotlin.metadata.shadow.metadata.deserialization.getExtensionOrNull
+import me.eugeniomarletti.kotlin.metadata.shadow.metadata.jvm.JvmProtoBuf
 
 /**
  * @see [getJvmMethodSignature]

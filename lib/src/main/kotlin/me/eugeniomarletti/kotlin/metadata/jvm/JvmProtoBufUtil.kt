@@ -4,12 +4,13 @@ import org.jetbrains.kotlin.serialization.ProtoBuf
 import org.jetbrains.kotlin.serialization.deserialization.NameResolver
 import org.jetbrains.kotlin.serialization.deserialization.TypeTable
 import org.jetbrains.kotlin.serialization.jvm.JvmProtoBufUtil
+import me.eugeniomarletti.kotlin.metadata.KotlinMetadataUtils
 import javax.lang.model.element.ExecutableElement
 
 /**
  * Returns JVM signature in the format: `equals(Ljava/lang/Object;)Z`.
  *
- * See [ExecutableElement.jvmMethodSignature][JvmDescriptorUtils.jvmMethodSignature] for getting the same from an [ExecutableElement].
+ * See [ExecutableElement.jvmMethodSignature][KotlinMetadataUtils.jvmMethodSignature] for getting the same from an [ExecutableElement].
  */
 fun ProtoBuf.Function.getJvmMethodSignature(nameResolver: NameResolver, typeTable: ProtoBuf.TypeTable = this.typeTable) =
     JvmProtoBufUtil.getJvmMethodSignature(this, nameResolver, TypeTable(typeTable))

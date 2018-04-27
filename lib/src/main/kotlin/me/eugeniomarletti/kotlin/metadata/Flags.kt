@@ -78,13 +78,16 @@ val ProtoBuf.Property.isSetterExternal: Boolean get() = hasSetterFlags() && Flag
 val ProtoBuf.Property.isSetterInline: Boolean get() = hasSetterFlags() && Flags.IS_INLINE_ACCESSOR.get(setterFlags)
 
 @Deprecated("The keyword 'header' was renamed to 'expect'", ReplaceWith("isExpectClass"))
-val ProtoBuf.Class.isHeaderClass: Boolean get() = isExpectClass
+val ProtoBuf.Class.isHeaderClass: Boolean
+    get() = isExpectClass
 
 @Deprecated("The keyword 'header' was renamed to 'expect'", ReplaceWith("isExpectFunction"))
-val ProtoBuf.Function.isHeaderFunction: Boolean get() = isExpectFunction
+val ProtoBuf.Function.isHeaderFunction: Boolean
+    get() = isExpectFunction
 
 @Deprecated("The keyword 'header' was renamed to 'expect'", ReplaceWith("isExpectProperty"))
-val ProtoBuf.Property.isHeaderProperty: Boolean get() = isExpectProperty
+val ProtoBuf.Property.isHeaderProperty: Boolean
+    get() = isExpectProperty
 
 private val ProtoBuf.Function.flagsOrOld: Int get() = if (hasFlags()) flags else loadOldFlags(oldFlags)
 private val ProtoBuf.Property.flagsOrOld: Int get() = if (hasFlags()) flags else loadOldFlags(oldFlags)

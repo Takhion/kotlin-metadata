@@ -5,7 +5,7 @@ import me.eugeniomarletti.WithMethods
 typealias Foo<T, R> = TestDataClass2<T, R>
 typealias Bar = TestDataClass2<String, Int>
 
-class IntArrayList: ArrayList<Int>()
+class IntArrayList : ArrayList<Int>()
 
 @WithMethods
 data class TestDataClass1(val counter: Int, val name: List<String?>) {
@@ -20,10 +20,10 @@ data class TestDataClass1(val counter: Int, val name: List<String?>) {
 data class TestDataClass2<out T, R>(val generic1: T, val generic2: R)
 
 @WithMethods
-data class TestDataClass3<out T: Any, R>(val foo: Foo<T, R>, val bar: Bar?)
+data class TestDataClass3<out T : Any, R>(val foo: Foo<T, R>, val bar: Bar?)
 
 @WithMethods
-data class TestDataClass4<Z, out T: TestDataClass2<Z, Z>, R>(val a: TestDataClass2<T, R>, val b: TestDataClass2<Z, *>)
+data class TestDataClass4<Z, out T : TestDataClass2<Z, Z>, R>(val a: TestDataClass2<T, R>, val b: TestDataClass2<Z, *>)
 
 @WithMethods(extensionName = "copyIfNecessary")
 data class TestDataClass5<out T, R>(val foo: Foo<T, R>, val list: IntArrayList?, val mList: MutableList<Any?>?)

@@ -29,8 +29,8 @@ abstract class KotlinAbstractProcessor : AbstractProcessor(), KotlinProcessingEn
         annotation: AnnotationMirror?,
         member: ExecutableElement?,
         userText: String?
-    ): Iterable<Completion>
-        = super.getCompletions(element, annotation, member, userText)
+    ): Iterable<Completion> =
+        super.getCompletions(element, annotation, member, userText)
 
     override abstract fun process(annotations: Set<TypeElement>, roundEnv: RoundEnvironment): Boolean
 

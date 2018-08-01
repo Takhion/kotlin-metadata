@@ -11,5 +11,5 @@ The `@Metadata` annotation contains information about Kotlin specific features t
 
 Gradle:
 ```gradle
-compile "me.eugeniomarletti.kotlin.metadata:kotlin-metadata:<version>"
+compile("me.eugeniomarletti.kotlin.metadata:kotlin-metadata:<version>")
 ```
